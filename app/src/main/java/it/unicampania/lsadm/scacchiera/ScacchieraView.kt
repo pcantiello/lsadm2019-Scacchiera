@@ -30,6 +30,8 @@ class ScacchieraView : View {
     private var casella = Rect()            // Generica casella
     private var paint = Paint()             // Oggetto paint per disegnare
 
+    private var numeroMosse = 0             // Contatore delle mosse effettuate
+
     // Attributi pubblici
     var coloreA : Int = Color.GREEN         // I due colori utilizzati per la scacchiera
     var coloreB : Int = Color.RED
@@ -65,4 +67,22 @@ class ScacchieraView : View {
             }
         }
     }
+
+    /**
+     * Metodo per avviare un nuovo gioco
+     */
+    fun nuovoGioco(divisioni: Int) {
+
+        // Inizializzazione della scacchiera
+        numDivisioni = divisioni
+        statoCaselle = Array(numDivisioni) { Array(numDivisioni) { false } }
+        for (i in 0..numDivisioni - 1) {
+            for (j in 0..numDivisioni - 1) {
+                statoCaselle[i][j] = ((i + j) % 2 == 0)
+            }
+        }
+        numeroMosse = 0     // Azzero il contatore
+        this.invalidate()   // Dichiaro che la view non è più valida e questo genera una chiamata a onDraw()
+    }
+
 }
