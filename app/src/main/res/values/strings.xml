@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Scacchiera</string>
+    <string name="divisioni">Divisioni</string>
+    <string name="segnaposto">Abcd</string>
+    <string name="mosse">Mosse</string>
+    <string name="vittorie">Vittorie</string>
+    <string name="restart">Nuova partita</string>
 </resources>
