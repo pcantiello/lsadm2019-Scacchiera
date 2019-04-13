@@ -29,7 +29,7 @@
             android:id="@+id/textView2" app:layout_constraintStart_toStartOf="@+id/textView"
             android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/textView"/>
     <TextView
-            android:text="TextView"
+            android:text="@string/segnaposto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textMosse"
@@ -63,4 +63,11 @@
             android:id="@+id/textDivisioni" app:layout_constraintStart_toEndOf="@+id/seekDivisioni"
             android:layout_marginStart="8dp" app:layout_constraintBaseline_toBaselineOf="@+id/textView"
             android:textStyle="bold"/>
+    <view
+            android:layout_width="0dp" android:layout_height="0dp"
+            class="it.unicampania.lsadm.scacchiera.ScacchieraView"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnRestart" android:id="@+id/viewScacchiera"/>
 </android.support.constraint.ConstraintLayout>
