@@ -93,6 +93,7 @@ class ScacchieraView : View {
             val i = x / dx
             val j = y / dy
             invertiCaselle(i, j)
+            effettuaScorrimento()   // Per aumentare la difficoltà
             ++numeroMosse
             this.invalidate()
             if (giocoCompleto())    // Avviso del termine del gioco
@@ -148,6 +149,29 @@ class ScacchieraView : View {
         }
 
         return true
+    }
+
+    /**
+     * Effettua lo scorrimento delle caselle per aumentare le difficoltà
+     */
+    private fun effettuaScorrimento() {
+
+        // Scorro le righe verso l'alto
+        val rigaTemp = statoCaselle[0]
+        for (i in 1..numDivisioni - 1) {
+            statoCaselle[i - 1] = statoCaselle[i]
+        }
+        statoCaselle[numDivisioni - 1] = rigaTemp
+
+        // Scorro le colonne verso sinistra
+        for (i in 0..numDivisioni - 1) {
+            val temp = statoCaselle[i][0]
+            for (j in 1..numDivisioni - 1) {
+                statoCaselle[i][j - 1] = statoCaselle[i][j]
+            }
+            statoCaselle[i][numDivisioni - 1] = temp
+        }
+
     }
 
 }
