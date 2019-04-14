@@ -1,11 +1,13 @@
 package it.unicampania.lsadm.scacchiera
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 
 /**
@@ -69,6 +71,28 @@ class ScacchieraView : View {
     }
 
     /**
+     * Invocato ogni volta he l'utente tocca la scacchiera
+     * il valore di ritorno: true indica che l'evento è stato processato
+     * L'annotazione elimina il warning dovuto alla mancanza del performClick() per i non vedenti
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        if (event?.action == MotionEvent.ACTION_UP) {   // Ci interessa solo questo tipo di movimento
+
+            val x = event.x.toInt() - schermo.left
+            val y = event.y.toInt() - schermo.top
+
+            // Calcolo gli indici corrispondenti, effettuo l'inversione e aggiorno la view
+            val i = x / dx
+            val j = y / dy
+            invertiCaselle(i, j)
+            this.invalidate()
+        }
+        return true
+    }
+
+    /**
      * Metodo per avviare un nuovo gioco
      */
     fun nuovoGioco(divisioni: Int) {
@@ -83,6 +107,17 @@ class ScacchieraView : View {
         }
         numeroMosse = 0     // Azzero il contatore
         this.invalidate()   // Dichiaro che la view non è più valida e questo genera una chiamata a onDraw()
+    }
+
+    /**
+     * Effettua l'inversione delle celle nella riga e nella colonna
+     */
+    private fun invertiCaselle(riga: Int, colonna: Int) {
+
+        for (i in 0..numDivisioni - 1) {
+            statoCaselle[riga][i] = !statoCaselle[riga][i]
+            statoCaselle[i][colonna] = !statoCaselle[i][colonna]
+        }
     }
 
 }
