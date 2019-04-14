@@ -9,6 +9,7 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.random.Random
 
 /**
  * Classe per la custom view relativa alla scacchiera
@@ -98,6 +99,8 @@ class ScacchieraView : View {
             this.invalidate()
             if (giocoCompleto())    // Avviso del termine del gioco
                 fineGioco.giocoTerminato(numeroMosse)
+            else
+                applicaDisturbo()
         }
         return true
     }
@@ -172,6 +175,15 @@ class ScacchieraView : View {
             statoCaselle[i][numDivisioni - 1] = temp
         }
 
+    }
+
+    /**
+     * Applica un disturbo alle caselle, modificandone una a caso
+     */
+    private fun applicaDisturbo() {
+        val i = Random.nextInt(0, numDivisioni - 1)
+        val j = Random.nextInt(0, numDivisioni - 1)
+        statoCaselle[i][j] = !statoCaselle[i][j]
     }
 
 }
