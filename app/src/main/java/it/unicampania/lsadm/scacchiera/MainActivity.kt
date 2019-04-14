@@ -42,6 +42,12 @@ class MainActivity : AppCompatActivity() {
         })
         seekDivisioni.progress = 0
 
+        // Listener del pulsante per l'avvio di una nuova partita
+        btnRestart.setOnClickListener {
+            ++numeroPartite
+            textPartite.text = numeroPartite.toString()
+            viewScacchiera.nuovoGioco(seekDivisioni.progress + minDivisioni)
+        }
     }
 
     /**
