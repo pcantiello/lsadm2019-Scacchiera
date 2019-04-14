@@ -3,6 +3,7 @@ package it.unicampania.lsadm.scacchiera
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -46,7 +47,14 @@ class MainActivity : AppCompatActivity() {
         btnRestart.setOnClickListener {
             ++numeroPartite
             textPartite.text = numeroPartite.toString()
-            viewScacchiera.nuovoGioco(seekDivisioni.progress + minDivisioni)
+            viewScacchiera.nuovoGioco(seekDivisioni.progress + minDivisioni,
+                object: ScacchieraView.FineGiocoListener {
+                    override fun giocoTerminato(numeroMosse: Int) {
+                        Toast.makeText(applicationContext, String.format(getString(R.string.vittoria), numeroMosse), Toast.LENGTH_SHORT).show()
+                        numeroVittorie++
+                        textVittorie.text = numeroVittorie.toString()
+                    }
+                })
         }
     }
 

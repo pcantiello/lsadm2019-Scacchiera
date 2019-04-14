@@ -38,6 +38,12 @@ class ScacchieraView : View {
     var coloreA : Int = Color.GREEN         // I due colori utilizzati per la scacchiera
     var coloreB : Int = Color.RED
 
+    // Definizione dell'interfaccia utilizzata come listner per avvisare delle fine del gioco
+    interface FineGiocoListener { fun giocoTerminato(numeroMosse: Int) }
+
+    // lateinit è necessario perché il listener non è noto all'instanziazione
+    private lateinit var fineGioco: FineGiocoListener
+
     /**
      * Override del metodo onDraw invocato ogni volta che è richiesto di ridisegnare la scacchiera
      */
@@ -87,15 +93,19 @@ class ScacchieraView : View {
             val i = x / dx
             val j = y / dy
             invertiCaselle(i, j)
+            ++numeroMosse
             this.invalidate()
+            if (giocoCompleto())    // Avviso del termine del gioco
+                fineGioco.giocoTerminato(numeroMosse)
         }
         return true
     }
 
     /**
      * Metodo per avviare un nuovo gioco
+     * Oltre al numero di divisioni, consente di avvisare il chiamante a vittoria avvenuta
      */
-    fun nuovoGioco(divisioni: Int) {
+    fun nuovoGioco(divisioni: Int, avvisaFineGioco: FineGiocoListener) {
 
         // Inizializzazione della scacchiera
         numDivisioni = divisioni
@@ -106,6 +116,7 @@ class ScacchieraView : View {
             }
         }
         numeroMosse = 0     // Azzero il contatore
+        fineGioco = avvisaFineGioco     // Memorizzo il listener da invocare
         this.invalidate()   // Dichiaro che la view non è più valida e questo genera una chiamata a onDraw()
     }
 
@@ -118,6 +129,25 @@ class ScacchieraView : View {
             statoCaselle[riga][i] = !statoCaselle[riga][i]
             statoCaselle[i][colonna] = !statoCaselle[i][colonna]
         }
+    }
+
+    /**
+     * Effettua il controllo dell'eventuale completamento del gioco
+     */
+    private fun giocoCompleto(): Boolean {
+
+        // Prendo lo stato della prima casella come modello e verifico che tutte le altre siano uguali
+        // Interrompo il controllo non appena ne trovo una diversa
+        val prima = statoCaselle[0][0]
+
+        for (i in 0..numDivisioni - 1) {
+            for (j in 0..numDivisioni - 1) {
+                if (prima != statoCaselle[i][j])
+                    return false
+            }
+        }
+
+        return true
     }
 
 }

@@ -6,4 +6,5 @@
     <string name="vittorie">Vittorie</string>
     <string name="restart">Nuova partita</string>
     <string name="partite">Partite</string>
+    <string name="vittoria">Hai vinto in %d mosse!"</string>
 </resources>
