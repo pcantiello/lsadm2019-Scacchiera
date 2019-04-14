@@ -5,4 +5,5 @@
     <string name="mosse">Mosse</string>
     <string name="vittorie">Vittorie</string>
     <string name="restart">Nuova partita</string>
+    <string name="partite">Partite</string>
 </resources>

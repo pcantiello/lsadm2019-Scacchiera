@@ -15,7 +15,7 @@
             android:layout_marginStart="16dp"/>
     <SeekBar
             style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:max="10"
             android:progress="1"
@@ -23,7 +23,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView" android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"/>
     <TextView
-            android:text="@string/mosse"
+            android:text="@string/partite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2" app:layout_constraintStart_toStartOf="@+id/textView"
@@ -32,23 +32,23 @@
             android:text="@string/segnaposto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textMosse"
+            android:id="@+id/textPartite"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/seekDivisioni" android:textStyle="bold"/>
     <TextView
             android:text="@string/vittorie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4" app:layout_constraintStart_toStartOf="@+id/textDivisioni"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"/>
+            android:id="@+id/textView4"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/textVittorie" android:layout_marginEnd="16dp"/>
     <TextView
             android:text="@string/segnaposto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textVittorie"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-            app:layout_constraintStart_toEndOf="@+id/textView4" android:layout_marginStart="16dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"/>
     <Button
             android:text="@string/restart"
             android:layout_width="wrap_content"
